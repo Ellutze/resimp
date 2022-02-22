@@ -4,4 +4,5 @@ __pycache__/
 dist*
 build*
 tt*
-TestRes1.xlsx
+*TestRes1.xlsx
+cp*

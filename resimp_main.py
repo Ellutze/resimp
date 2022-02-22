@@ -5,15 +5,22 @@ Created on Thu Feb 17 14:50:17 2022
 @author: jakub.kucera
 """
 
-#Run GUI
-
-
-
 #layout:
 # import file field, PAM-RTM install location, initiate button
 
 
 
+#accomodate for file formats (default the excel from Cristian, 2nd singular csv table (3rows, repeated?)(3rows with various temp in same col?)
+
+from resimp_UI import rUI
+
+#eLoc is the location of PAM-RTM installation
+#rnm is the resin name
+#fl is the source file for data (either csv or xlsx)
+eLoc, rnm, fl = rUI()
+print(eLoc)
+print(rnm)
+print(fl)
 
 # upon button press:
 
@@ -26,9 +33,13 @@ import subprocess
 import openpyxl
 #for general mathematical operations
 import numpy as np
- 
+
+import os
+lPath = os.getcwd()
+print(lPath)
 # Give the location of the file
-path = "D:\\resimp\\TestRes1.xlsx"  # replace this with the above
+path = lPath+"\\TestRes1.xlsx"  # replace this with the above
+fn = "filenametest" # replace with the UI input
  
 #workbook open
 wb_obj = openpyxl.load_workbook(path,data_only = True)
@@ -69,10 +80,12 @@ for t in Ts:
         e = True
         while e == True:
             a = sheet_obj.cell(row = r, column = c)
-            dadt = sheet_obj.cell(row = r, column = c+1)
+            dadt = sheet_obj.cell(row = r, column = c+3)
         
             if a.value != None:
-                f.write(str(a.value)+" "+str(dadt.value)+"\n")
+                a = format(a.value,'.30f')
+                dadt = format(dadt.value,'.30f')
+                f.write(str(a)+" "+str(dadt)+"\n")
                 #m_temp = np.matriix([a,dadt])
                 #M = np.concatenate((M,m_temp),axis=0)
                 r = r + 1
@@ -85,7 +98,10 @@ for t in Ts:
     i = i + 1
 
 
-
+#outputs to be picked up by the PAM-RTM script
+np.save(lPath+"\\temp_list.npy",Ts,allow_pickle=True, fix_imports=True)
+with open("filename.txt",'w') as f:
+    f.write(fn)
 
 
 
@@ -94,12 +110,15 @@ for t in Ts:
 #initiate command line 
     
 #REPLACE FILE -- RELATIVE LOCATION TO THIS SCRIPT
+  
     
-command = "VEBatch -activeconfig Trade:CompositesandPlastics -activeapp VisualRTM -sessionrun D:\\VEt\\rc_9.py" 
-process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, cwd="C:\\Program Files\\ESI Group\\Visual-Environment\\17.0\\Windows-x64")
-proc_stdout = process.communicate()#[0].strip()
-print(command)
-print(proc_stdout)
-
-
+def cmd2(command,RTMFile=""):
+    #Passes command to command line.
+    #Required due to Visual-RTM having it's own library of python packages.
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, cwd="C:\\Program Files\\ESI Group\\Visual-Environment\\17.0\\Windows-x64")
+    proc_stdout = process.communicate()#[0].strip()
+    print(command)
+    print(proc_stdout)
+    
+cmd2("VEBatch -activeconfig Trade:CompositesandPlastics -activeapp VisualRTM -sessionrun "+lPath+"\\imp_PR.py")
 #after import is done make sure to delete everything in "tt" (temporary temperature tables)
