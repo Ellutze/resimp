@@ -16,14 +16,14 @@ import numpy as np
 
 
 
-lPath='D:\\resimp'#'D:\\resimp'#
+lPath = "D:\\resimp\\"
 
-Ts = np.load(lPath+"\\temp_list.npy")
+Ts = np.load(lPath+"temp_list.npy")
 
 with open(lPath+"\\cp.txt", "a") as text_file:
     text_file.write(" start \n")
 
-with open(lPath+"\\filename.txt",'r') as e:
+with open(lPath+"filename.txt",'r') as e:
     rsn = str(e.read())
 
 #__________________ VhmCommand BEGIN __________________
