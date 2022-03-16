@@ -16,7 +16,7 @@ import numpy as np
 
 
 
-lPath='D:\\resimp'#'D:\\resimp'#
+lPath='D:\\resimp'#'D:\\resimp'#'D:\\resimp'#'D:\\resimp'#'D:\\resimp'#
 
 Ts = np.load(lPath+"\\temp_list.npy")
 
