@@ -25,7 +25,7 @@ import numpy as np
 import os
 
 
-def resimp(rnm,fn,esi):
+def resimp(rsn,fn,esi):
     #esi is the location of PAM-RTM installation
     #rnm is the resin name
     #fn is the source file for data (either csv or xlsx)
@@ -120,9 +120,11 @@ def resimp(rnm,fn,esi):
             i = i + 1
     #outputs to be picked up by the PAM-RTM script
     np.save(lPath+"\\temp_list.npy",Ts,allow_pickle=True, fix_imports=True)
-    with open(lPath+"\\filename.txt",'w') as f:
-        f.write(rnm)
     
+
+
+    with open(lPath+"\\filename.txt",'w') as f:
+        f.write(rsn)  
     
     
     #save file with meta-data  

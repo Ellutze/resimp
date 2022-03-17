@@ -18,15 +18,25 @@ import PySimpleGUI as sg
 #Run GUI
 from resimp_main import resimp
 
+import os
+
 def rUI():
     
     
     
     #UI for basic inputs only
-
+    esil = "C:\\Program Files\\ESI Group\\Visual-Environment\\17.0\\Windows-x64"
+    #if ESIloc.txt in folder --> replace 
+    try:
+        lPath = os.getcwd()
+        with open(lPath+"\\ESIloc.txt",'r') as e:
+            e = str(e.read())
+    except:
+        e = esil
+    
 
     layoutx = [[sg.Text('resin name', size=(15, 1)), sg.InputText("", key='rnm',size=(40, 1))], 
-               [sg.Text('PAM-RTM location', size=(15, 1)), sg.InputText("C:\\Program Files\\ESI Group\\Visual-Environment\\17.0\\Windows-x64", key='esi',size=(40, 1))],
+               [sg.Text('PAM-RTM location', size=(15, 1)), sg.InputText(e, key='esi',size=(40, 1))],
                [sg.Text('Enter one of the following files:')],
                [sg.FileBrowse('Source file (.xlsx)',file_types=(("Text Files", "*.xlsx"),),key='x',size=(15, 1)),sg.InputText("", key='fl1',size=(40, 1))],
                [sg.FileBrowse('Source file (.csv)',file_types=(("Text Files", "*.csv"),),key='x',size=(15, 1)),sg.InputText("", key='fl2',size=(40, 1))],
@@ -62,9 +72,20 @@ def rUI():
                     esi = str(values['esi'])
                     rnm = str(values['rnm'])
                     fn = fl
-                    resimp(rnm, fn,esi)
+                    
+                    if esi != esil:
+                        with open(lPath+"\\ESIloc.txt",'w') as f:
+                            f.write(esi)  
+                    
+                    
+                    resimp(rnm,fn,esi)
                     print("verify in PAM-RTM that your resin has imported succesfully")
                     print("You can now close the window, or chose next file to import")
+                    
+                    #store functional ESI location for next time
+                    if esi != esil:
+                        with open(lPath+"\\ESIloc.txt",'w') as f:
+                            f.write(esi) 
                 else:
                     print("Only .csv and .xlsx file formats are currently supported")
             
