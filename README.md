@@ -12,3 +12,7 @@ There are 2 types of import formats available: .csv and .xlsx.
 The .csv formats consists of repeated sets of 3 columns: fixed temperature, degree of cure, kinetic. This is quite easily re-created manually or automatically, hence this format is recommended. 
 
 The .xlsx follows a specific format that was requested.
+
+The figure below shows an example import (this does not correspond to a real resin)
+
+![image](https://user-images.githubusercontent.com/40354213/161074898-e94f3b83-20cb-4169-b04f-85411cebe986.png)
