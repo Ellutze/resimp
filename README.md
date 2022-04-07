@@ -7,7 +7,7 @@ This allows for importing resin tables into PAM-RTM, which include variation of 
 
 This is done by importing number of temperature tables. (as many as is required to minimize interpolation errors)
 
-Can be turned into executable using "pyinstaller -F resimp_UI.py" to run on machines without Python. The resulting executable needs to be put into a folder with: cp.txt, imp_PR.py. This is because the files run through command line (due to PAM-RTM using separate Python library) will not be packaged using pyinstaller. It is recommended to place the 2 import example in the folder as well for reference.
+Can be turned into executable using "pyinstaller -F resimp_UI.py" to run on machines without Python. The resulting executable needs to be put into a folder with: cp.txt, imp_PR.py, and empty "tt" folder. This is because the files run through command line (due to PAM-RTM using separate Python library) will not be packaged using pyinstaller. It is recommended to place the 2 import example in the folder as well for reference.
 
 There are 2 types of import formats available: .csv and .xlsx. 
 
