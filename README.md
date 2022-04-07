@@ -1,5 +1,6 @@
 # resimp
 PAM-RTM resin importer
+![image](https://user-images.githubusercontent.com/40354213/162161278-2a283522-4fcb-4346-bc00-495e04ff94a3.png)
 
 This allows for importing resin tables into PAM-RTM, which include variation of degree of cure, kinetic and temperature.
 
